@@ -18,6 +18,7 @@ public class Game {
     private int currentLemonY;
     private int rowNumbers;
     private int colNumbers;
+    private Label appleLabel;
 
 
 
@@ -34,6 +35,8 @@ public class Game {
             VBox rowPane = new VBox();
             for (int j = 0; j <= rowNumbers ; j++) {
                 Label tmp = new Label();
+                tmp.setPrefWidth(30);
+                tmp.setPrefHeight(30);
                 rowPane.getChildren().add(tmp);
             }
 
@@ -45,18 +48,17 @@ public class Game {
         String appleUrl = Game.class.getClassLoader().getResource("sample/resources/apple.png").toExternalForm();
         String lemonUrl = Game.class.getClassLoader().getResource("sample/resources/Lemon.png").toExternalForm();
 
-
-
         ImageView appleIcon = new ImageView(appleUrl);
         ImageView lemonIcon = new ImageView(lemonUrl);
-
 
         setCurrentAppleX((int)(Math.random() * colNumbers));
         setCurrentAppleY((int)(Math.random() * rowNumbers));
 
-        ((Label)((VBox)columnPane.getChildren().get(getCurrentAppleX())).getChildren().get(getCurrentAppleY())).setGraphic(appleIcon);
 
 
+
+        appleLabel = ((Label)((VBox)columnPane.getChildren().get(getCurrentAppleX())).getChildren().get(getCurrentAppleY()));
+        appleLabel.setGraphic(appleIcon);
 
 
         int tmpX = (int)(Math.random() * colNumbers);
@@ -68,12 +70,23 @@ public class Game {
         }
 
 
-
-
         gameScene = new Scene(root,720,600);
         gameScene.getStylesheets().add(getClass().getResource("buttons.css").toExternalForm());
-    }
 
+        root.setOnMouseClicked( event -> {
+
+            System.out.println(event.getSceneX() + " " + event.getSceneY());
+
+            setCurrentAppleX((int)(event.getSceneX()/24));
+            setCurrentAppleY((int)(event.getSceneY()/20));
+
+            appleLabel = ((Label) ((VBox)columnPane.getChildren().get(getCurrentAppleX())).getChildren().get(getCurrentAppleY()));
+            appleLabel.setGraphic(appleIcon);
+
+        });
+
+        columnPane.setOnMouseClicked( event -> System.out.println(event.getSource()+":"+ event.getSceneY()));
+    }
 
 
     public Scene getGameScene() {

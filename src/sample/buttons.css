@@ -20,6 +20,8 @@
 }
 
 .label {
-    -fx-background-color: grey;
-    -fx-border-color: black;
+    -fx-background-color: white;
+
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
 }
