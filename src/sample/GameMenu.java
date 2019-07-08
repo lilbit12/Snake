@@ -26,9 +26,11 @@ public class GameMenu extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         GridPane gridPane = new GridPane();
-        Scene scene = new Scene(gridPane,700,600, Color.BLUE);
+        Scene scene = new Scene(gridPane,720,600, Color.BLUE);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
+
         scene.getStylesheets().add(getClass().getResource("buttons.css").toExternalForm());
 
         Button playBtn = new Button("Play");
@@ -44,6 +46,8 @@ public class GameMenu extends Application {
         gridPane.setBackground(Background.EMPTY);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.add(menu, 0, 3);
+
+
 
 
         playBtn.setOnAction(e -> {
