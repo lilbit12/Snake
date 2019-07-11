@@ -18,6 +18,10 @@ import java.io.FileInputStream;
 public class GameMenu extends Application {
 
 
+    public static final int BLOCK_SIZE =30;
+    public static final int APP_W =BLOCK_SIZE *24;
+    public static final int APP_H =BLOCK_SIZE *20;
+
     public static void uruchom(String[] args){
         launch(args);
     }
@@ -26,7 +30,7 @@ public class GameMenu extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         GridPane gridPane = new GridPane();
-        Scene scene = new Scene(gridPane,720,600, Color.BLUE);
+        Scene scene = new Scene(gridPane,APP_W,APP_H, Color.BLUE);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -51,7 +55,7 @@ public class GameMenu extends Application {
 
 
         playBtn.setOnAction(e -> {
-            Game mainGame = new Game();
+            Game mainGame = new Game(APP_W,APP_H);
             primaryStage.setScene(mainGame.getGameScene());
         });
 
